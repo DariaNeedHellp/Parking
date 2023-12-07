@@ -50,18 +50,18 @@ class CParking():
                             carCurrent.setColor(criteria)
                             flag = False
                             break
-                    if flag:
-                        for m in range(0,len(models)):
-                            if criteria == models[m]:
-                                carCurrent.setModel(criteria)
+                        if flag:
+                            for m in range(0,len(models)):
+                                if criteria == models[m]:
+                                    carCurrent.setModel(criteria)
+                                    flag = False
+                                    break
+                        if flag:
+                            if carCurrent.numCarCheck(True):
+                                carCurrent.setNumCar(criteria)
                                 flag = False
-                                break
-                    if flag:
-                        if carCurrent.numCarCheck(True):
-                            carCurrent.setNumCar(criteria)
-                            flag = False
-                    if flag:
-                        print("Введеный вами критерий не найден в базе данных или номер машины неправильного формата")
+                        if flag:
+                            print("Введеный вами критерий не найден в базе данных или номер машины неправильного формата")
                     else:
                         print("Парковочное место пусто")
 
