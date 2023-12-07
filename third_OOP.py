@@ -30,6 +30,40 @@ class CParking():
                 return self.__places[numRow]
         print("Введённый вами номер места парковки не найден")
         return 0
+    def ChangeCriteria(self):
+        colors = ["белый", "желтый", "коричневый", "ораньжевый", "фиолетовый", "синий", "зеленый", "черный", "серый",
+                  "красный", "иной"]
+        models = ["mitsubishi", "ford", "volkswagen", "chevrolet", "renault", "kia", "hyundai", "nissan", "toyota",
+                  "lada", "bmv", "chery", "mercedes", "honda", "byd", "иной"]
+        print("Введите место на котором стоит машина, запись которой нужно изменить")
+        numPlaceInput = input()
+        print("Введите критерий, на который хотите заменить")
+        criteria = input()
+        for numRow in range(0,len(self.__places)):
+            placeCurrent = self.__places[numRow]
+            if placeCurrent.getNumPlace() == numPlaceInput:
+                if placeCurrent.getOccupied():
+                    carCurrent = placeCurrent.getCar()
+                    flag = True
+                    for c in range(0,len(colors)):
+                        if criteria == colors[c]:
+                            carCurrent.setColor(criteria)
+                            flag = False
+                            break
+                    if flag:
+                        for m in range(0,len(models)):
+                            if criteria == models[m]:
+                                carCurrent.setModel(criteria)
+                                flag = False
+                                break
+                    if flag:
+                        if carCurrent.numCarCheck(True):
+                            carCurrent.setNumCar(criteria)
+                            flag = False
+                    if flag:
+                        print("Введеный вами критерий не найден в базе данных или номер машины неправильного формата")
+                    else:
+                        print("Парковочное место пусто")
 
     def searchPlace(self):
         flagKtg = True
@@ -414,7 +448,8 @@ while Work:
     print("    4. Найти машины по критериям")
     print("    5. Вывести весь список мест на парковке(занятых и незанятых)")
     print("    6. Записать в базу")
-    print("    7. Выйти из программы")
+    print("    7. Изменение данных машины")
+    print("    8. Выйти из программы")
 
     x = int(input())
     if x == 1:
@@ -470,8 +505,9 @@ while Work:
 
     if x == 6:
         parkingNew.savePlacesToBase()
-
     if x == 7:
+        parkingNew.ChangeCriteria()
+    if x == 8:
         Work = False
         print("Спасибо что использовали наше программное обеспечение")
 
